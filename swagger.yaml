@@ -1,0 +1,103 @@
+swagger: '2.0'
+info:
+  title: Node.js Express API
+  description: API documentation for Node.js Express application
+  version: '1.0'
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: User registration details
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        '201':
+          description: User registered successfully
+        '400':
+          description: Failed to register user
+  /login:
+    post:
+      summary: Authenticate user and generate JWT token
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: User login credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: JWT token generated successfully
+        '401':
+          description: Authentication failed
+        '404':
+          description: User not found
+  /protected:
+    get:
+      summary: Protected route requiring JWT token
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Access granted to protected route
+        '401':
+          description: Unauthorized - Token not provided or invalid
+  /api/data:
+    get:
+      summary: Get data from public API with optional filtering
+      parameters:
+        - name: category
+          in: query
+          description: Filter by category
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: Limit the number of results
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Data'
+definitions:
+  Data:
+    type: object
+    properties:
+      API:
+        type: string
+      Description:
+        type: string
+      Auth:
+        type: string
+      HTTPS:
+        type: boolean
+      Cors:
+        type: string
+      Link:
+        type: string
+      Category:
+        type: string
