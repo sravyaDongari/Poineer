@@ -13,7 +13,7 @@ Node.js and npm (or yarn) installed on your system.
 A basic understanding of Node.js, Express.js, and JavaScript.
 Installation:
 
-Clone this repository or download the code.
+Clone this repository or download the code :https://github.com/sravyaDongari/Poineer.git
 Open a terminal in the project directory.
 Run npm install to install the required dependencies.
 Database Setup:
